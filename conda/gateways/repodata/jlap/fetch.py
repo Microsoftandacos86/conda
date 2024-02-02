@@ -304,7 +304,10 @@ def request_url_jlap_state(
                     )
                 else:
                     raise JlapSkipZst()
-            except (JlapSkipZst, HTTPError) as e:
+            except (JlapSkipZst, HTTPError, zstandard.ZstdError) as e:
+                if isinstance(e, zstandard.ZstdError):
+                    # will this include the token
+                    log.debug("%s could not be decompressed. %e", url, e)
                 if isinstance(e, HTTPError) and e.response.status_code != 404:
                     raise
                 if not isinstance(e, JlapSkipZst):
