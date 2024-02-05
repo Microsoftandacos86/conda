@@ -4,8 +4,8 @@
 
 ### Bug fixes
 
-* Fallback to `repodata.json` if `repodata.json.zst` exists (does not return
-  404) but cannot be decompressed as zstandard. (#13558)
+* Fallback to `repodata.json` if `repodata.json.zst` cannot be decompressed as
+  zstandard. (#13558)
 
 ### Deprecations
 
